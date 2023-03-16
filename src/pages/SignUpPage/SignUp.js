@@ -13,24 +13,28 @@ export default function SignUp() {
                 <input
                     type="email"
                     placeholder="email"
-                    required />
+                    required
+                    data-test="email-input" />
                 <input
                     type="password"
                     placeholder="senha"
-                    required />
+                    required
+                    data-test="password-input" />
                 <input
                     type="text"
                     placeholder="nome"
-                    required />
+                    required
+                    data-test="user-name-input" />
                 <input
                     type="url"
                     placeholder="foto"
-                    required />
+                    required
+                    data-test="user-image-input" />
 
-                <button>Cadastrar</button>
+                <button data-test="signup-btn">Cadastrar</button>
             </form>
 
-            <Link to="/">
+            <Link data-test="login-link" to="/">
                 <p>Já tem uma conta? Faça login!</p>
             </Link>
 

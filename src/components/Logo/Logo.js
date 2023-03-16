@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import logo from "../../assets/Logo.png"
+import logo from "../../assets/logo.png"
 
 export default function Logo() {
     return (
         <ContainerLogo>
             <img src={logo} alt="trackIt logo" />
         </ContainerLogo>
-    )
+    );
 }
 
 const ContainerLogo = styled.figure`
@@ -16,4 +16,4 @@ const ContainerLogo = styled.figure`
     img{
         width: 100%;
     }
-`
+`;

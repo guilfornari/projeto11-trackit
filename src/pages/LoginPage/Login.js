@@ -13,16 +13,19 @@ export default function Login() {
                 <input
                     type="email"
                     placeholder="email"
-                    required />
+                    required
+                    data-test="email-input" />
                 <input
                     type="password"
                     placeholder="senha"
-                    required />
+                    required
+                    data-test="password-input" />
 
-                <button>Entrar</button>
+                <button data-test="login-btn" >Entrar</button>
             </form>
 
-            <Link to="/cadastro">
+            <Link to="/cadastro"
+                data-test="signup-link">
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
 
