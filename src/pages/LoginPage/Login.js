@@ -11,21 +11,20 @@ export default function Login() {
 
             <form onSubmit={() => alert("Sent!")}>
                 <input
+                    data-test="email-input"
                     type="email"
                     placeholder="email"
-                    required
-                    data-test="email-input" />
+                    required />
                 <input
+                    data-test="password-input"
                     type="password"
                     placeholder="senha"
-                    required
-                    data-test="password-input" />
+                    required />
 
                 <button data-test="login-btn" >Entrar</button>
             </form>
 
-            <Link to="/cadastro"
-                data-test="signup-link">
+            <Link data-test="signup-link" to="/cadastro">
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
 
