@@ -9,27 +9,6 @@ const PageContainer = styled.div`
     align-items: center;
     padding: 92px 18px 0px;
 
-    div {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    h2 {
-        color: #126BA5;
-        font-size: 23px;
-    }
-
-    button {
-        width: 40px;
-        height: 35px;
-        background-color: #52B6FF;
-        border-radius: 5px;
-        color: #FFFFFF;
-        font-size: 27px;
-    }
-
     p {
         color: #666666;
         margin-top: 28px;
@@ -37,4 +16,25 @@ const PageContainer = styled.div`
     }
 `;
 
-export { PageContainer };
+
+const TopContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    h2 {
+            color: #126BA5;
+            font-size: 23px;
+            margin-right: 146px;
+        }
+
+        button {
+            width: 40px;
+            height: 35px;
+            background-color: #52B6FF;
+            border-radius: 5px;
+            color: #FFFFFF;
+            font-size: 27px;
+        }
+`
+export { PageContainer, TopContainer };
