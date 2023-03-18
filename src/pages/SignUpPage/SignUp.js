@@ -5,7 +5,7 @@ import Logo from "../../components/Logo/Logo";
 import { PageContainer } from "./signUpStyle";
 
 
-export default function Cadastro() {
+export default function SignUp() {
 
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
@@ -39,7 +39,10 @@ export default function Cadastro() {
         });
 
 
-        promise.catch(error => alert(error.response.data.message));
+        promise.catch((error) => {
+            alert(error.response.data.message);
+            setServerResponse("waiting");
+        });
     }
 
     return (
