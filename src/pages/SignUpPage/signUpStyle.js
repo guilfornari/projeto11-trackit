@@ -27,6 +27,10 @@ const PageContainer = styled.div`
         &::placeholder {
             font-size: 20px;
         }
+
+        &:disabled {
+            background-color: #F2F2F2;
+        }
     }
 
     button {
@@ -42,5 +46,6 @@ const PageContainer = styled.div`
         font-size: 14px;
         color: #52B6FF;
     }
-`
+`;
+
 export { PageContainer };

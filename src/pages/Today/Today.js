@@ -1,5 +1,5 @@
 import Top from "../../components/Top/Top.js";
-import Bottom from "../../components/Bottom/Bottom.js"
+import Bottom from "../../components/Bottom/Bottom.js";
 import { PageContainer } from "./todayStyle.js";
 
 export default function Today() {

@@ -41,4 +41,4 @@ const TrackerCircle = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 40px;
-`
+`;

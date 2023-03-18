@@ -36,5 +36,6 @@ const TopContainer = styled.div`
             color: #FFFFFF;
             font-size: 27px;
         }
-`
+`;
+
 export { PageContainer, TopContainer };
