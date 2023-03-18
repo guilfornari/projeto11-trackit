@@ -5,7 +5,7 @@ import Logo from "../../components/Logo/Logo";
 import { PageContainer } from "./signUpStyle";
 
 
-export default function SignUp() {
+export default function Cadastro() {
 
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
@@ -48,41 +48,36 @@ export default function SignUp() {
             <Logo />
 
             <form onSubmit={createUser}>
-                <input
+                <input data-test="email-input"
                     value={userEmail}
                     onChange={e => setUserEmail(e.target.value)}
                     type="email"
                     placeholder="email"
                     required
-                    data-test="email-input"
                     disabled={isAble} />
-                <input
+                <input data-test="password-input"
                     value={userPassword}
                     onChange={e => setUserPassword(e.target.value)}
                     type="password"
                     placeholder="senha"
                     required
-                    data-test="password-input"
                     disabled={isAble} />
-                <input
+                <input data-test="user-name-input"
                     value={userName}
                     onChange={e => setUserName(e.target.value)}
                     type="text"
                     placeholder="nome"
                     required
-                    data-test="user-name-input"
                     disabled={isAble} />
-                <input
+                <input data-test="user-name-input"
                     value={userImage}
                     onChange={e => setUserImage(e.target.value)}
                     type="url"
                     placeholder="foto"
                     required
-                    data-test="user-image-input"
                     disabled={isAble} />
 
-                <button
-                    data-test="signup-btn"
+                <button data-test="signup-btn"
                     disabled={isAble} >
                     Cadastrar
                 </button>
