@@ -40,11 +40,21 @@ const PageContainer = styled.div`
         background-color: #52B6FF;
         border-radius: 5px;
         cursor: pointer;
+
+        &:disabled {
+            cursor: default;
+            background-color: #52B6FF;
+            opacity: 0.7;
+        }
     }
 
     a {
         font-size: 14px;
         color: #52B6FF;
+    }
+
+    span{
+        display: ${props => props.isVisible};
     }
 `;
 

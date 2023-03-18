@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
 
 
@@ -16,6 +17,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     const isAble = (serverLog === undefined) ? true : false;
+    const isVisible = (serverLog !== undefined) ? "flex" : "none";
 
     function logUserIn(e) {
         e.preventDefault();
@@ -45,7 +47,7 @@ export default function Login() {
     }
 
     return (
-        <PageContainer>
+        <PageContainer isVisible={isVisible}>
 
             <Logo />
 
@@ -69,7 +71,17 @@ export default function Login() {
 
                 <button data-test="login-btn"
                     disabled={isAble} >
-                    Entrar
+                    <span>Entrar</span>
+                    <ThreeDots
+                        height="60"
+                        width="60"
+                        radius="9"
+                        color="#FFFFFF"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={isAble}
+                    />
                 </button>
             </form>
 
@@ -81,3 +93,4 @@ export default function Login() {
         </PageContainer>
     );
 }
+

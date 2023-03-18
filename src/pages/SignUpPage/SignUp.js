@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import { PageContainer } from "./signUpStyle";
-
 
 export default function SignUp() {
 
@@ -15,6 +15,7 @@ export default function SignUp() {
     const navigate = useNavigate();
 
     const isAble = (serverResponse === undefined) ? true : false;
+    const isVisible = (serverResponse !== undefined) ? "flex" : "none";
 
     function createUser(e) {
         e.preventDefault();
@@ -46,7 +47,7 @@ export default function SignUp() {
     }
 
     return (
-        <PageContainer>
+        <PageContainer isVisible={isVisible}>
 
             <Logo />
 
@@ -82,7 +83,17 @@ export default function SignUp() {
 
                 <button data-test="signup-btn"
                     disabled={isAble} >
-                    Cadastrar
+                    <span>Cadastrar</span>
+                    <ThreeDots
+                        height="60"
+                        width="60"
+                        radius="9"
+                        color="#FFFFFF"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={isAble}
+                    />
                 </button>
             </form>
 
