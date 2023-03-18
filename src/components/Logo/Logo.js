@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import ironMan from "../../assets/ironman.jpeg";
+import trackit from "../../assets/trackIt.jpg";
 
 export default function Logo() {
     return (
         <ContainerLogo>
-            <img src={ironMan} alt="trackIt logo" />
+            <img src={trackit} alt="trackIt logo" />
         </ContainerLogo>
     );
 }
