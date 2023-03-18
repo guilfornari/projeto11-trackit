@@ -36,7 +36,7 @@ export default function Cadastro() {
             console.log(response.data);
             setServerResponse(response.data);
             navigate("/");
-        })
+        });
 
 
         promise.catch(error => alert(error.response.data.message));
