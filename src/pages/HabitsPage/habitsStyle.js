@@ -35,6 +35,7 @@ const TopContainer = styled.div`
             border-radius: 5px;
             color: #FFFFFF;
             font-size: 27px;
+            cursor: pointer;
         }
 `;
 

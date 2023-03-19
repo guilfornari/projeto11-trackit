@@ -81,8 +81,10 @@ export default function SignUp() {
                     required
                     disabled={isAble} />
 
-                <button data-test="signup-btn"
-                    disabled={isAble} >
+                <button
+                    data-test="signup-btn"
+                    disabled={isAble}
+                    type="submit" >
                     <span>Cadastrar</span>
                     <ThreeDots
                         height="60"

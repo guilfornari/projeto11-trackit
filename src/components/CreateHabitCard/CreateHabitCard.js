@@ -1,24 +1,98 @@
+import axios from "axios";
+import { useState, useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../../UserContext";
 
-export default function CreateHabitCard() {
+export default function CreateHabitCard({ isVisible, setNewHabit }) {
+
+    const week = ["D", "S", "T", "Q", "Q", "S", "S"];
+    const [habitName, setHabitName] = useState("");
+    const [habitDays, setHabitDays] = useState([]);
+
+    const userInfo = useContext(UserContext);
+
+    function pickDay(dayIndex) {
+        if (habitDays.includes(dayIndex)) {
+            unpickDay(dayIndex, habitDays);
+        } else {
+            const dayslist = [...habitDays, dayIndex];
+            console.log(dayslist);
+            setHabitDays([...habitDays, dayIndex]);
+        }
+    }
+
+    function unpickDay(index, itemList) {
+        itemList = itemList.filter(item => item !== index);
+        console.log(itemList);
+        setHabitDays(itemList);
+    }
+
+    function submitHabit() {
+        if (habitName === "" || habitDays.length === 0) {
+            return alert("Coloque um nome e escolha ao menos um dia.");
+        }
+        const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+        const newHabit = {
+            name: habitName,
+            days: habitDays
+        };
+        console.log(newHabit);
+
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${userInfo.token}`
+            }
+        };
+        console.log(config);
+
+        const promise = axios.post(url, newHabit, config);
+        promise.then(response => console.log(response.data));
+        promise.catch(erro => erro.data);
+
+        setHabitName("");
+        setHabitDays([]);
+        setNewHabit(false);
+    }
+
+
     return (
-        <ContainerCard>
-            <input placeholder="nome do hábito" />
+        <ContainerCard isVisible={isVisible} >
+            <input
+                placeholder="nome do hábito"
+                value={habitName}
+                onChange={e => setHabitName(e.target.value)}
+                required />
             <div>
-                <button>D</button>
-                <button>S</button>
-                <button>T</button>
-                <button>Q</button>
-                <button>Q</button>
-                <button>S</button>
-                <button>S</button>
+                {week.map((day, i) => <DayButton
+                    key={i}
+                    day={day}
+                    dayIndex={i}
+                    pickDay={pickDay}
+                    habitDays={habitDays} />)}
+
             </div>
             <div>
                 <p>Cancelar</p>
-                <button>Salvar</button>
+                <button onClick={submitHabit}>
+                    Salvar
+                </button>
             </div>
         </ContainerCard>
     );
+}
+
+function DayButton({ day, dayIndex, pickDay, habitDays }) {
+
+    const isSelected = (habitDays.includes(dayIndex)) ? "#CFCFCF" : "#FFFFFF";
+    const alsoSelected = (habitDays.includes(dayIndex)) ? "#FFFFFF" : "#DBDBDB";
+    return (
+        <ButtonToSelect
+            isSelected={isSelected}
+            alsoSelected={alsoSelected}
+            onClick={() => pickDay(dayIndex)}>
+            {day}
+        </ButtonToSelect>
+    )
 }
 
 const ContainerCard = styled.div`
@@ -27,7 +101,7 @@ const ContainerCard = styled.div`
     border-radius: 5px;
     background-color: #FFFFFF;
     margin-top: 20px;
-    display: flex;
+    display: ${props => props.isVisible};
     flex-direction: column;
     padding: 18px 18px 15px;
     margin-bottom: 0px; 
@@ -50,22 +124,13 @@ const ContainerCard = styled.div`
 
     button {
         border-radius: 5px;
+        cursor: pointer;
     }
 
     div:first-of-type {
         display: flex;
         justify-content: flex-start;
         margin-top: 8px;
-
-        button {
-            width: 30px;
-            height: 30px;
-            color: #DBDBDB;
-            font-size: 20px;
-            background-color: #FFFFFF;
-            border: 1px solid #D5D5D5;
-            margin-right: 4px;
-        }
     }
 
     div:nth-of-type(2) {
@@ -92,4 +157,14 @@ const ContainerCard = styled.div`
         }
     }
 
+`;
+
+const ButtonToSelect = styled.button`
+            width: 30px;
+            height: 30px;
+            color: ${props => props.alsoSelected};
+            font-size: 20px;
+            background-color: ${props => props.isSelected};
+            border: 1px solid #D5D5D5;
+            margin-right: 4px;
 `;

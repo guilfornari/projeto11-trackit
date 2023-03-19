@@ -1,17 +1,24 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Bottom() {
     return (
         <ContainerBottom data-test="menu">
-            <div data-test="habit-link" >
+
+            <Link data-test="habit-link" to={"/habitos"} >
                 Hábitos
-            </div>
-            <TrackerCircle data-test="today-link">
-                Hoje
+            </Link>
+
+            <TrackerCircle>
+                <Link data-test="today-link" to={"/hoje"}>
+                    Hoje
+                </Link>
             </TrackerCircle>
-            <div data-test="history-link" >
+
+            <Link data-test="history-link" to={"/historico"} >
                 Histórico
-            </div>
+            </Link>
+
         </ContainerBottom>
     );
 }
@@ -29,6 +36,12 @@ const ContainerBottom = styled.div`
     padding: 22px 31px 26px 36px;
     color: #52B6FF;
     font-size: 18px;
+
+    a {
+        text-decoration: none;
+        color: #52B6FF;
+        
+    }
 `;
 
 const TrackerCircle = styled.div`
@@ -41,4 +54,8 @@ const TrackerCircle = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 40px;
+
+    a{
+        color: #FFFFFF;
+    }
 `;

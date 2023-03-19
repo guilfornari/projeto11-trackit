@@ -9,7 +9,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 
 
-export default function Login() {
+export default function Login({ setUserInfo }) {
 
     const [logEmail, setLogEmail] = useState("");
     const [logPassword, setLogPassword] = useState("");
@@ -36,6 +36,7 @@ export default function Login() {
         promise.then((response) => {
             console.log(response.data);
             setServerLog(response.data);
+            setUserInfo(response.data);
             navigate("/hoje");
         });
 
@@ -70,7 +71,8 @@ export default function Login() {
                     disabled={isAble} />
 
                 <button data-test="login-btn"
-                    disabled={isAble} >
+                    disabled={isAble}
+                    type="submit" >
                     <span>Entrar</span>
                     <ThreeDots
                         height="60"

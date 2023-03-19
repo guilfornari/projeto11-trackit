@@ -1,24 +1,30 @@
 import styled from "styled-components";
 
-export default function HabitCard() {
+export default function HabitCard({ habit }) {
+
+    const week = ["D", "S", "T", "Q", "Q", "S", "S"];
+
     return (
         <ContainerCard>
             <div>
-                <h3>Hábito bonitinho</h3>
+                <h3>{habit.name}</h3>
                 <div>
-                    <button>D</button>
-                    <button>S</button>
-                    <button>T</button>
-                    <button>Q</button>
-                    <button>Q</button>
-                    <button>S</button>
-                    <button>S</button>
+                    {week.map((day, i) => <DayBox key={i} day={day} i={i} habit={habit} />)}
                 </div>
             </div>
             <ion-icon name="trash-outline"></ion-icon>
         </ContainerCard>
 
     );
+}
+
+function DayBox({ day, i, habit }) {
+
+    const isPicked = (habit.days.includes(i)) ? "#CFCFCF" : "#FFFFFF"
+
+    return (
+        <ContainerDay isPicked={isPicked}>{day}</ContainerDay>
+    )
 }
 
 const ContainerCard = styled.div`
@@ -46,14 +52,7 @@ const ContainerCard = styled.div`
     }
 
     button {
-            width: 30px;
-            height: 30px;
-            color: #DBDBDB;
-            font-size: 20px;
-            background-color: #FFFFFF;
-            border: 1px solid #D5D5D5;
-            margin-right: 4px;
-            border-radius: 5px;
+
         }
 
     ion-icon {
@@ -61,4 +60,15 @@ const ContainerCard = styled.div`
         color: #666666;
     }
 
+`;
+
+const ContainerDay = styled.button`
+    width: 30px;
+    height: 30px;
+    color: #DBDBDB;
+    font-size: 20px;
+    background-color: ${props => props.isPicked};
+    border: 1px solid #D5D5D5;
+    margin-right: 4px;
+    border-radius: 5px;
 `;

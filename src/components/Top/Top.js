@@ -1,12 +1,16 @@
 import styled from "styled-components";
-import ironman from "../../assets/ironman.jpeg";
+import { useContext } from "react";
+import { UserContext } from "../../UserContext";
 
 export default function Top() {
+
+    const userImage = useContext(UserContext);
+
     return (
         <ContainerHeader data-test="header">
             <h1>TrackIt</h1>
             <figure>
-                <img src={ironman} alt="user face" />
+                <img src={userImage.image} alt="user face" />
             </figure>
         </ContainerHeader>
     );
@@ -31,7 +35,8 @@ const ContainerHeader = styled.div`
     }
 
     img {
-        width: 100%;
+        width: 51px;
+        height: 51px;
         border-radius: 26px;
     }
 
