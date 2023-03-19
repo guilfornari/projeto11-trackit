@@ -17,7 +17,6 @@ export default function Login({ setUserInfo }) {
     const navigate = useNavigate();
 
     const isAble = (serverLog === undefined) ? true : false;
-    const isVisible = (serverLog !== undefined) ? "flex" : "none";
 
     function logUserIn(e) {
         e.preventDefault();
@@ -48,7 +47,7 @@ export default function Login({ setUserInfo }) {
     }
 
     return (
-        <PageContainer isVisible={isVisible}>
+        <PageContainer>
 
             <Logo />
 
@@ -73,8 +72,7 @@ export default function Login({ setUserInfo }) {
                 <button data-test="login-btn"
                     disabled={isAble}
                     type="submit" >
-                    <span>Entrar</span>
-                    <ThreeDots
+                    <span>{(isAble) ? <ThreeDots
                         height="60"
                         width="60"
                         radius="9"
@@ -82,8 +80,8 @@ export default function Login({ setUserInfo }) {
                         ariaLabel="three-dots-loading"
                         wrapperStyle={{}}
                         wrapperClassName=""
-                        visible={isAble}
-                    />
+                        visible={true}
+                    /> : "Entrar"}</span>
                 </button>
             </form>
 

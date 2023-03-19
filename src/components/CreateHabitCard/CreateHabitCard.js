@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../../UserContext";
 
-export default function CreateHabitCard({ isVisible, setNewHabit }) {
+export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, listHabits, setListHabits }) {
 
     const week = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [habitName, setHabitName] = useState("");
@@ -28,11 +28,11 @@ export default function CreateHabitCard({ isVisible, setNewHabit }) {
     }
 
     function submitHabit() {
-        if (habitName === "" || habitDays.length === 0) {
+        if (habitName === "" && habitDays.length === 0) {
             return alert("Coloque um nome e escolha ao menos um dia.");
         }
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-        const newHabit = {
+        const createdHabit = {
             name: habitName,
             days: habitDays
         };
@@ -45,19 +45,36 @@ export default function CreateHabitCard({ isVisible, setNewHabit }) {
         };
         console.log(config);
 
-        const promise = axios.post(url, newHabit, config);
+        const promise = axios.post(url, createdHabit, config);
         promise.then(response => console.log(response.data));
         promise.catch(erro => erro.data);
 
         setHabitName("");
         setHabitDays([]);
+
+        if (newHabit === true) {
+            setNewHabit(false);
+        } else {
+            setNewHabit(true);
+        }
+
+        if (listHabits === true) {
+            setListHabits(false);
+        } else {
+            setListHabits(true);
+        }
+
+    }
+
+    function hideCard() {
         setNewHabit(false);
     }
 
 
     return (
-        <ContainerCard isVisible={isVisible} >
+        <ContainerCard data-test="habit-create-container" isVisible={isVisible} >
             <input
+                data-test="habit-name-input"
                 placeholder="nome do hábito"
                 value={habitName}
                 onChange={e => setHabitName(e.target.value)}
@@ -72,8 +89,14 @@ export default function CreateHabitCard({ isVisible, setNewHabit }) {
 
             </div>
             <div>
-                <p>Cancelar</p>
-                <button onClick={submitHabit}>
+                <span
+                    data-test="habit-create-cancel-btn"
+                    onClick={hideCard}>
+                    Cancelar
+                </span>
+                <button
+                    data-test="habit-create-save-btn"
+                    onClick={submitHabit}>
                     Salvar
                 </button>
             </div>
@@ -87,6 +110,7 @@ function DayButton({ day, dayIndex, pickDay, habitDays }) {
     const alsoSelected = (habitDays.includes(dayIndex)) ? "#FFFFFF" : "#DBDBDB";
     return (
         <ButtonToSelect
+            data-test="habit-day"
             isSelected={isSelected}
             alsoSelected={alsoSelected}
             onClick={() => pickDay(dayIndex)}>
@@ -149,14 +173,14 @@ const ContainerCard = styled.div`
             margin-left: 23px;
         }
 
-        p {
+        span {
             cursor: pointer;
             color: #52B6FF;
             font-size: 16px;
             margin: 0px;
         }
-    }
 
+    }
 `;
 
 const ButtonToSelect = styled.button`

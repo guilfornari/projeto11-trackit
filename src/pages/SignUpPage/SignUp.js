@@ -15,7 +15,6 @@ export default function SignUp() {
     const navigate = useNavigate();
 
     const isAble = (serverResponse === undefined) ? true : false;
-    const isVisible = (serverResponse !== undefined) ? "flex" : "none";
 
     function createUser(e) {
         e.preventDefault();
@@ -47,7 +46,7 @@ export default function SignUp() {
     }
 
     return (
-        <PageContainer isVisible={isVisible}>
+        <PageContainer>
 
             <Logo />
 
@@ -85,8 +84,7 @@ export default function SignUp() {
                     data-test="signup-btn"
                     disabled={isAble}
                     type="submit" >
-                    <span>Cadastrar</span>
-                    <ThreeDots
+                    <span>{(isAble) ? <ThreeDots
                         height="60"
                         width="60"
                         radius="9"
@@ -94,8 +92,9 @@ export default function SignUp() {
                         ariaLabel="three-dots-loading"
                         wrapperStyle={{}}
                         wrapperClassName=""
-                        visible={isAble}
-                    />
+                        visible={true}
+                    /> : "Entrar"}</span>
+
                 </button>
             </form>
 

@@ -13,6 +13,7 @@ const PageContainer = styled.div`
         color: #666666;
         margin-top: 28px;
         font-size: 18px;
+        display: ${props => props.noHabits};
     }
 `;
 
