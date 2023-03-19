@@ -10,15 +10,18 @@ import { useState } from "react";
 export default function App() {
 
   const [userInfo, setUserInfo] = useState({});
+  const [bar, setBar] = useState(0);
+
+  const objectUser = { userInfo: userInfo, bar: bar };
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={userInfo}>
+      <UserContext.Provider value={objectUser}>
         <Routes>
           <Route path="/" element={<Login setUserInfo={setUserInfo} />} />
           <Route path="/cadastro" element={<SignUp />} />
           <Route path="/habitos" element={<Habits />} />
-          <Route path="/hoje" element={<Today />} />
+          <Route path="/hoje" element={<Today setBar={setBar} />} />
           <Route path="/historico" element={<History />} />
         </Routes>
       </UserContext.Provider>

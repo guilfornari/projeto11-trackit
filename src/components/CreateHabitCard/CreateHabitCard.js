@@ -1,15 +1,20 @@
 import axios from "axios";
 import { useState, useContext } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
 import { UserContext } from "../../UserContext";
+
 
 export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, listHabits, setListHabits }) {
 
     const week = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [habitName, setHabitName] = useState("");
     const [habitDays, setHabitDays] = useState([]);
+    const [serverResponse, setServerResponse] = useState("waiting")
 
     const userInfo = useContext(UserContext);
+
+    const isAble = (serverResponse === undefined) ? true : false;
 
     function pickDay(dayIndex) {
         if (habitDays.includes(dayIndex)) {
@@ -31,6 +36,8 @@ export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, list
         if (habitName === "" && habitDays.length === 0) {
             return alert("Coloque um nome e escolha ao menos um dia.");
         }
+        setServerResponse(undefined);
+
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
         const createdHabit = {
             name: habitName,
@@ -40,26 +47,30 @@ export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, list
 
         const config = {
             headers: {
-                "Authorization": `Bearer ${userInfo.token}`
+                "Authorization": `Bearer ${userInfo.userInfo.token}`
             }
         };
-        console.log(config);
 
         const promise = axios.post(url, createdHabit, config);
-        promise.then(response => console.log(response.data));
-        promise.catch(erro => erro.data);
+        promise.then(response => {
+            setServerResponse(response.data);
+            if (newHabit === true) {
+                setNewHabit(false);
+            } else {
+                setNewHabit(true);
+            }
+        });
+        promise.catch(error => {
+            setServerResponse("waiting");
+            alert(error.data.message);
+        });
 
         setHabitName("");
         setHabitDays([]);
 
-        if (newHabit === true) {
-            setNewHabit(false);
-        } else {
-            setNewHabit(true);
-        }
-
         if (listHabits === true) {
-            setListHabits(false);
+            const newBool = false;
+            setListHabits(newBool);
         } else {
             setListHabits(true);
         }
@@ -78,7 +89,8 @@ export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, list
                 placeholder="nome do hábito"
                 value={habitName}
                 onChange={e => setHabitName(e.target.value)}
-                required />
+                required
+                disabled={isAble} />
             <div>
                 {week.map((day, i) => <DayButton
                     key={i}
@@ -96,8 +108,18 @@ export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, list
                 </span>
                 <button
                     data-test="habit-create-save-btn"
-                    onClick={submitHabit}>
-                    Salvar
+                    onClick={submitHabit}
+                    disabled={isAble}>
+                    {(isAble) ? <ThreeDots
+                        height="60"
+                        width="60"
+                        radius="9"
+                        color="#FFFFFF"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                    /> : "Salvar"}
                 </button>
             </div>
         </ContainerCard>

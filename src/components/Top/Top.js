@@ -10,7 +10,7 @@ export default function Top() {
         <ContainerHeader data-test="header">
             <h1>TrackIt</h1>
             <figure>
-                <img src={userImage.image} alt="user face" />
+                <img src={userImage.userInfo.image} alt="user face" />
             </figure>
         </ContainerHeader>
     );
@@ -27,9 +27,11 @@ const ContainerHeader = styled.div`
     position: fixed;
     top: 0px;
     left: 0px;
+    z-index: 1; 
 
 
     figure {
+        
         width: 51px;
         height: 51px;
     }

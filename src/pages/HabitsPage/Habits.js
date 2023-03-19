@@ -21,7 +21,7 @@ export default function Habits() {
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
         const config = {
             headers: {
-                "Authorization": `Bearer ${userInfo.token}`
+                "Authorization": `Bearer ${userInfo.userInfo.token}`
             }
         };
 

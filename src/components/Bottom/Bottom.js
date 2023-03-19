@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { useContext } from "react";
+import { UserContext } from "../../UserContext";
 
 export default function Bottom() {
+
+    const barPercentage = useContext(UserContext);
+
     return (
         <ContainerBottom data-test="menu">
 
@@ -11,7 +18,14 @@ export default function Bottom() {
 
             <TrackerCircle>
                 <Link data-test="today-link" to={"/hoje"}>
-                    Hoje
+                    <CircularProgressbar
+                        value={barPercentage.bar}
+                        text={"Hoje"}
+                        styles={buildStyles({
+                            textColor: "#FFFFFF",
+                            pathColor: "#FFFFFF",
+                            trailColor: "#52B6FF"
+                        })} />
                 </Link>
             </TrackerCircle>
 
@@ -40,7 +54,6 @@ const ContainerBottom = styled.div`
     a {
         text-decoration: none;
         color: #52B6FF;
-        
     }
 `;
 
@@ -56,6 +69,7 @@ const TrackerCircle = styled.div`
     margin-bottom: 40px;
 
     a{
-        color: #FFFFFF;
+        width: 80px;
+        height: 80px;
     }
 `;

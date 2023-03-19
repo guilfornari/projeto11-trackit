@@ -6,24 +6,23 @@ const PageContainer = styled.div`
     background-color: #E5E5E5;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 92px 18px 0px;
+    align-items: flex-start;
+    padding: 92px 18px 80px 18px;
+    overflow-y: auto;
 
-    div {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+    div:first-of-type{
+        margin-bottom: 18px;
     }
 
     h2 {
         color: #126BA5;
         font-size: 23px;
         margin-top: 7px;
+        margin-bottom: 3px;
     }
 
     p {
-        color: #BABABA;
+        color: ${props => props.isGreen};
         font-size: 18px;
         margin-top: 4px;
     }

@@ -7,7 +7,8 @@ const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 92px 18px 0px;
+    padding: 92px 18px 80px 18px;
+    overflow-y: auto;
 
     p {
         color: #666666;

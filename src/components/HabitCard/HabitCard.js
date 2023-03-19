@@ -26,7 +26,7 @@ export default function HabitCard({ habit, setListHabits, listHabits }) {
 
         const config = {
             headers: {
-                "Authorization": `Bearer ${userInfo.token}`
+                "Authorization": `Bearer ${userInfo.userInfo.token}`
             }
         };
 
