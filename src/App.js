@@ -12,7 +12,7 @@ export default function App() {
   const [userInfo, setUserInfo] = useState({});
   const [bar, setBar] = useState(0);
 
-  const objectUser = { userInfo: userInfo, bar: bar };
+  const objectUser = { userInfo, bar };
 
   return (
     <BrowserRouter>

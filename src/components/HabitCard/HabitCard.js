@@ -14,8 +14,6 @@ export default function HabitCard({ habit, setListHabits, listHabits }) {
 
         if (window.confirm("Tens certeza que queres deletar este hábito?")) {
             deleteHabit(id);
-            toggleList(listHabits);
-
         } else {
             alert("Vamos começar mais uma vez!");
         }
@@ -31,7 +29,7 @@ export default function HabitCard({ habit, setListHabits, listHabits }) {
         };
 
         const promise = axios.delete(url, config);
-        promise.then(response => console.log(response.data));
+        promise.then(() => { toggleList(listHabits); });
         promise.catch(error => console.log(error.data));
     }
 
