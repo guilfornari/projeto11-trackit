@@ -6,8 +6,7 @@ import { UserContext } from "../../UserContext.js";
 import axios from "axios";
 import DayCard from "../../components/DayCard/DayCard.js";
 import dayjs from "dayjs";
-
-
+import "dayjs/locale/pt-br";
 
 export default function Today({ setBar }) {
 
@@ -15,7 +14,7 @@ export default function Today({ setBar }) {
     const [dayHabits, setDayHabits] = useState([]);
     const now = dayjs();
     const [reloadHabits, setReloadHabits] = useState(false);
-    const [percentage, setPercentage] = useState(0)
+    const [percentage, setPercentage] = useState(0);
     const whatPercentage = (percentage === 0 || dayHabits.length === 0)
         ? "Nenhum hábito concluído ainda"
         : `${percentage}% dos hábitos concluídos`;
@@ -47,7 +46,7 @@ export default function Today({ setBar }) {
                 counter++;
             }
         }
-        let result = Math.ceil((counter / newArray.length) * 100);
+        const result = Math.ceil((counter / newArray.length) * 100);
         console.log(counter);
         console.log(result);
         setPercentage(result);
@@ -59,7 +58,7 @@ export default function Today({ setBar }) {
             <Top />
             <PageContainer isGreen={isGreen}>
                 <div>
-                    <h2 data-test="today" >{now.format("dddd, D/MM")}</h2>
+                    <h2 data-test="today" >{now.locale("pt-br").format("dddd, D/MM")}</h2>
                     <p data-test="today-counter" >{whatPercentage}</p>
                 </div>
                 {dayHabits.map(habit => <DayCard

@@ -33,9 +33,6 @@ export default function CreateHabitCard({ isVisible, setNewHabit, newHabit, list
     }
 
     function submitHabit() {
-        // if (habitName === "" && habitDays.length === 0) {
-        //     return alert("Coloque um nome e escolha ao menos um dia.");
-        // }
         setServerResponse(undefined);
 
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";

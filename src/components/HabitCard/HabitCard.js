@@ -29,7 +29,9 @@ export default function HabitCard({ habit, setListHabits, listHabits }) {
         };
 
         const promise = axios.delete(url, config);
-        promise.then(() => { toggleList(listHabits); });
+        promise.then(() => {
+            toggleList(listHabits);
+        });
         promise.catch(error => console.log(error.data));
     }
 
@@ -62,11 +64,11 @@ export default function HabitCard({ habit, setListHabits, listHabits }) {
 
 function DayBox({ day, i, habit }) {
 
-    const isPicked = (habit.days.includes(i)) ? "#CFCFCF" : "#FFFFFF"
+    const isPicked = (habit.days.includes(i)) ? "#CFCFCF" : "#FFFFFF";
 
     return (
         <ContainerDay data-test="habit-day" isPicked={isPicked}>{day}</ContainerDay>
-    )
+    );
 }
 
 const ContainerCard = styled.div`
